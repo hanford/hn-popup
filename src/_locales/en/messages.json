@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "hn-popup",
+    "description": "Browser hn from the convienence of a chrome extension."
+  },
+  "appDescription": {
+    "message": "hn-popup",
+    "description": "Browser hn from the convienence of a chrome extension."
+  }
+}
