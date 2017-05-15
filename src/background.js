@@ -1,15 +1,17 @@
-const domain = 'https://news.ycombinator.com/*'
+import { attachHeadersListener } from 'chrome-sidebar'
+import { url } from './constants'
 
-chrome.webRequest.onHeadersReceived.addListener(details => {
-  for (let i = 0; i < details.responseHeaders.length; i++) {
-    if (details.responseHeaders[i].name.toLowerCase() === 'x-frame-options') {
-      details.responseHeaders.splice(i, 1)
+chrome.browserAction.onClicked.addListener(tab => {
+  console.log('Browser Action Triggered')
+  // for the current tab, inject the "inject.js" file & execute it
+  chrome.tabs.executeScript(tab.id, {
+    file: 'browser.js'
+  })
+})
 
-      return {
-        responseHeaders: details.responseHeaders
-      }
-    }
-  }
-}, {
-  urls: [domain]
-}, ['blocking', 'responseHeaders'])
+attachHeadersListener({
+  webRequest: chrome.webRequest,
+  hosts: url,
+  iframeHosts: url,
+  overrideFrameOptions: true
+})

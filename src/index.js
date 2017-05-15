@@ -1,29 +1,16 @@
-function setUserAgent (window, callback) {
-  var userAgentProp = {
-    get: function () { return ua },
-  }
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Frame from './frame'
 
-  var userAgentPlatform = {
-    get: function () { return platform }
-  }
-
-  var userAgentVendor = {
-    get: function () { return vendor }
-  }
-
-  Object.defineProperty(window.navigator, 'userAgent', userAgentProp)
-  Object.defineProperty(window.navigator, 'platform', userAgentPlatform)
-  Object.defineProperty(window.navigator, 'vendor', userAgentVendor)
-
-  callback()
+if (Frame.isReady()) {
+  Frame.toggle()
+} else {
+  boot()
 }
 
-let frame = document.createElement('iframe')
+function boot() {
+  const root = document.createElement('div')
+  document.body.appendChild(root)
 
-document.body.appendChild(frame)
-
-const frameWindow = frame.contentWindow
-
-setUserAgent(frameWindow, () => {
-  frame.src = 'https://news.ycombinator.com/?mobile=true'
-})
+  ReactDOM.render(<Frame />, root)
+}

@@ -2,28 +2,29 @@
   "name": "hn-popup",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Browse hn from anywhere",
+  "description": "Browse hacker news from anywhere",
   "icons": {
-    "16": "icon.png",
-    "32": "icon.png",
-    "128": "icon.png"
+    "16": "assets/icon.png",
+    "32": "assets/icon.png",
+    "128": "assets/icon.png"
   },
   "permissions": [
     "webRequest",
     "webRequestBlocking",
-    "https://news.ycombinator.com/*?mobile=true"
+    "tabs",
+    "https://*/*",
+    "http://*/*"
   ],
-  "browser_action": {
-    "default_popup": "index.html"
-  },
+  "browser_action": {},
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": true
   },
   "default_locale": "en",
   "content_scripts": [
     {
-      "matches": ["https://news.ycombinator.com/*?mobile=true"],
-      "js": ["ua-override.js"],
+      "matches": ["https://news.ycombinator.com/?mobile=true"],
+      "js": ["cs.js"],
       "run_at" : "document_start",
       "all_frames": true
     }
