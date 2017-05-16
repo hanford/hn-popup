@@ -39,6 +39,7 @@ export class ExtendedFrame extends Frame {
         url={url}
         ref={r => this.frame = r}
         onMount={this.frameMount}
+        containerStyle={{width: '100%', maxWidth: '500px'}}
       />
     )
   }
